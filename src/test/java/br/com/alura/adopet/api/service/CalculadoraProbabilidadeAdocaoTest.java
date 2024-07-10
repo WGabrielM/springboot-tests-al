@@ -7,16 +7,17 @@ import br.com.alura.adopet.api.model.Pet;
 import br.com.alura.adopet.api.model.ProbabilidadeAdocao;
 import br.com.alura.adopet.api.model.TipoPet;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class CalculadoraProbabilidadeAdocaoTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class CalculadoraProbabilidadeAdocaoTest {
 
     @Test
-    @DisplayName("Probabilidade alta para gatos jovens com peso baixo")
-    void probabilidadeAltaCenario1() {
+    void deveriaRetornarProbabilidadeAltaParaPetComIdadeBaixaEPesoBaixo(){
         //idade 4 anos e 4kg - ALTA
 
+        //ARRANGE
         Abrigo abrigo = new Abrigo(new CadastroAbrigoDto(
                 "Abrigo feliz",
                 "94999999999",
@@ -30,19 +31,19 @@ public class CalculadoraProbabilidadeAdocaoTest {
                 "Cinza",
                 4.0f
         ), abrigo);
-
         CalculadoraProbabilidadeAdocao calculadora = new CalculadoraProbabilidadeAdocao();
+
+        //ACT
         ProbabilidadeAdocao probabilidade = calculadora.calcular(pet);
 
-        Assertions.assertEquals(ProbabilidadeAdocao.ALTA, probabilidade);
+        //ASSERT
+        Assertions.assertEquals(ProbabilidadeAdocao.ALTA,probabilidade);
     }
 
     @Test
-    @DisplayName("Probabilidade média para gatos idosos com peso baixo")
-    void probabilidadeMediaCenario1() {
+    void deveriaRetornarProbabilidadeMediaParaPetComIdadeAltaEPesoBaixo(){
         //idade 15 anos e 4kg - MEDIA
 
-        //ARRANGE
         Abrigo abrigo = new Abrigo(new CadastroAbrigoDto(
                 "Abrigo feliz",
                 "94999999999",
@@ -56,12 +57,14 @@ public class CalculadoraProbabilidadeAdocaoTest {
                 "Cinza",
                 4.0f
         ), abrigo);
-
         CalculadoraProbabilidadeAdocao calculadora = new CalculadoraProbabilidadeAdocao();
 
-        //ACT
+
         ProbabilidadeAdocao probabilidade = calculadora.calcular(pet);
-        //ASSERT
-        Assertions.assertEquals(ProbabilidadeAdocao.MEDIA, probabilidade);
+
+        Assertions.assertEquals(ProbabilidadeAdocao.MEDIA,probabilidade);
     }
+
+
+
 }
